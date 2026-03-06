@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const navLinks = [
   { label: "Home", href: "#home" },
@@ -13,6 +13,14 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [logoAnimated, setLogoAnimated] = useState(false);
+  const logoRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    // Trigger logo animation on mount
+    const timer = setTimeout(() => setLogoAnimated(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -44,9 +52,18 @@ export default function Navbar() {
             data-ocid="nav.link"
           >
             <img
+              ref={logoRef}
               src="/assets/uploads/image-1.png"
               alt="RiyaMeds Pharma"
               className="h-10 md:h-12 w-auto object-contain"
+              style={{
+                opacity: logoAnimated ? 1 : 0,
+                transform: logoAnimated
+                  ? "translateY(0) scale(1)"
+                  : "translateY(-20px) scale(0.8)",
+                transition:
+                  "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)",
+              }}
             />
           </button>
 
