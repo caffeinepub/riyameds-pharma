@@ -8,23 +8,39 @@
 
 import { IDL } from '@icp-sdk/core/candid';
 
+export const Time = IDL.Int;
+export const Inquiry = IDL.Record({
+  'name' : IDL.Text,
+  'email' : IDL.Text,
+  'message' : IDL.Text,
+  'timestamp' : Time,
+  'phone' : IDL.Text,
+});
+
 export const idlService = IDL.Service({
+  'getAllInquiries' : IDL.Func([], [IDL.Vec(Inquiry)], ['query']),
   'getInquiryCount' : IDL.Func([], [IDL.Nat], ['query']),
-  'submitInquiry' : IDL.Func(
-      [IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text],
-      [IDL.Bool],
-      [],
-    ),
+  'submitInquiry' : IDL.Func([IDL.Text, IDL.Text, IDL.Text, IDL.Text], [], []),
 });
 
 export const idlInitArgs = [];
 
 export const idlFactory = ({ IDL }) => {
+  const Time = IDL.Int;
+  const Inquiry = IDL.Record({
+    'name' : IDL.Text,
+    'email' : IDL.Text,
+    'message' : IDL.Text,
+    'timestamp' : Time,
+    'phone' : IDL.Text,
+  });
+  
   return IDL.Service({
+    'getAllInquiries' : IDL.Func([], [IDL.Vec(Inquiry)], ['query']),
     'getInquiryCount' : IDL.Func([], [IDL.Nat], ['query']),
     'submitInquiry' : IDL.Func(
-        [IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text],
-        [IDL.Bool],
+        [IDL.Text, IDL.Text, IDL.Text, IDL.Text],
+        [],
         [],
       ),
   });

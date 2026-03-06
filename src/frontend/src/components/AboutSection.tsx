@@ -1,145 +1,201 @@
-import { Heart, Microscope, Target, TrendingUp } from "lucide-react";
+import {
+  Building2,
+  CheckCircle2,
+  FlaskConical,
+  Heart,
+  Microscope,
+  TrendingUp,
+} from "lucide-react";
 import { motion } from "motion/react";
 
 const stats = [
-  { value: "6+", label: "Products", icon: Microscope },
-  { value: "100+", label: "Partner Clinics", icon: Heart },
-  { value: "50,000+", label: "Happy Customers", icon: TrendingUp },
+  { value: "9+", label: "Products", icon: FlaskConical },
+  { value: "GMP", label: "Certified Manufacturing", icon: Building2 },
+  { value: "2+", label: "Therapeutic Areas", icon: Microscope },
+  { value: "Pan India", label: "Distribution", icon: TrendingUp },
 ];
 
-const pillars = [
-  {
-    icon: Target,
-    title: "Our Mission",
-    desc: "To provide accessible, effective, and genuine healthcare solutions that improve lives and empower healthcare professionals.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Our Vision",
-    desc: "To be India's most trusted pharmaceutical company, known for scientific integrity, genuine ingredients, and patient-first values.",
-  },
-  {
-    icon: Heart,
-    title: "Our Values",
-    desc: "Transparency in every ingredient, quality in every product, compassion in every interaction. No shortcuts, no compromises.",
-  },
+const highlights = [
+  "High-quality therapeutic formulations",
+  "Musculoskeletal pain management specialists",
+  "Advanced dermatology solutions",
+  "Trusted manufacturing partners",
+  "Strict pharmaceutical quality standards",
+  "Patient-centered innovation",
 ];
 
 export default function AboutSection() {
   return (
     <section
       id="about"
-      className="section-padding"
-      style={{
-        background:
-          "linear-gradient(180deg, oklch(0.98 0.005 145) 0%, oklch(0.96 0.015 145) 100%)",
-      }}
+      className="section-padding section-gradient-light medical-pattern"
       data-ocid="about.section"
     >
       <div className="max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left: Story */}
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <span className="inline-block text-secondary font-semibold text-sm tracking-widest uppercase mb-3 bg-secondary/10 px-4 py-1.5 rounded-full">
+            About Us
+          </span>
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+            About <span className="text-gradient-blue">Riyameds Pharma</span>
+          </h2>
+        </motion.div>
+
+        <div className="grid lg:grid-cols-2 gap-16 items-start">
+          {/* Left: Story + Highlights */}
           <motion.div
-            initial={{ opacity: 0, x: -32 }}
+            initial={{ opacity: 0, x: -28 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             className="space-y-8"
           >
-            <div>
-              <span className="inline-block text-primary font-semibold text-sm tracking-widest uppercase mb-3">
-                About Us
-              </span>
-              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight">
-                Science Meets{" "}
-                <span className="text-gradient-green">Genuine Care</span>
-              </h2>
-              <p className="text-muted-foreground leading-relaxed text-lg mb-4">
-                RiyaMeds Pharma Private Limited was founded with a singular
-                vision: to deliver genuine, science-backed pharmaceutical
-                products that truly make a difference.
+            <div className="space-y-5">
+              <p className="text-foreground/80 leading-relaxed text-lg">
+                <strong className="text-foreground">
+                  Riyameds Pharma Private Limited
+                </strong>{" "}
+                is a rapidly growing Indian pharmaceutical company committed to
+                delivering effective, safe and high-quality healthcare
+                solutions.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                We combine cutting-edge research with natural ingredients to
-                create products that healthcare professionals trust and patients
-                love. As a new entrant to India's pharmaceutical market, we
-                bring fresh perspectives, rigorous quality standards, and an
-                unwavering commitment to transparency.
+                The company focuses primarily on musculoskeletal pain management
+                and dermatology therapies. Our formulations are designed to
+                provide fast relief, improved recovery and better patient
+                comfort.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                With a strong focus on quality, innovation and patient care,
+                Riyameds Pharma continues to expand its portfolio to address
+                evolving healthcare needs. We work with trusted manufacturing
+                partners and follow strict pharmaceutical quality standards to
+                ensure consistent product excellence.
               </p>
             </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-4">
+            {/* Highlights checklist */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {highlights.map((item, i) => (
+                <motion.div
+                  key={item}
+                  initial={{ opacity: 0, x: -16 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.07 }}
+                  className="flex items-center gap-3"
+                >
+                  <CheckCircle2
+                    size={16}
+                    className="text-secondary flex-shrink-0"
+                  />
+                  <span className="text-sm font-medium text-foreground/80">
+                    {item}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Logo banner */}
+            <div
+              className="rounded-2xl p-6 flex items-center gap-5 border border-primary/10"
+              style={{
+                background:
+                  "linear-gradient(135deg, oklch(0.18 0.12 250) 0%, oklch(0.26 0.13 230) 100%)",
+              }}
+            >
+              <img
+                src="/assets/uploads/image-1.png"
+                alt="RiyaMeds Pharma"
+                className="h-16 w-auto object-contain bg-white/10 rounded-xl p-2 flex-shrink-0"
+              />
+              <div>
+                <div className="font-display font-bold text-white text-lg leading-tight">
+                  Riyameds Pharma Private Limited
+                </div>
+                <div className="text-white/55 text-sm mt-1">
+                  Registered Indian Pharmaceutical Company
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right: Stats grid */}
+          <motion.div
+            initial={{ opacity: 0, x: 28 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="space-y-6"
+          >
+            {/* Stats cards */}
+            <div className="grid grid-cols-2 gap-5">
               {stats.map(({ value, label, icon: Icon }, i) => (
                 <motion.div
                   key={label}
-                  initial={{ opacity: 0, y: 24 }}
+                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.12 }}
-                  className="bg-white rounded-2xl p-5 text-center shadow-sm border border-border/60 green-glow"
+                  transition={{ delay: i * 0.1 }}
+                  className="bg-white rounded-2xl p-6 text-center shadow-sm border border-border/60 card-hover medical-glow"
                   data-ocid={`about.stat.card.${i + 1}`}
                 >
-                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-3">
-                    <Icon size={20} className="text-primary" />
+                  <div
+                    className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3"
+                    style={{
+                      background:
+                        i % 2 === 0
+                          ? "oklch(0.45 0.21 250 / 0.1)"
+                          : "oklch(0.52 0.16 184 / 0.1)",
+                    }}
+                  >
+                    <Icon
+                      size={22}
+                      className={
+                        i % 2 === 0 ? "text-primary" : "text-secondary"
+                      }
+                    />
                   </div>
                   <div className="font-display font-bold text-2xl text-foreground">
                     {value}
                   </div>
-                  <div className="text-xs text-muted-foreground font-medium mt-1">
+                  <div className="text-xs text-muted-foreground font-medium mt-1 leading-tight">
                     {label}
                   </div>
                 </motion.div>
               ))}
             </div>
-          </motion.div>
 
-          {/* Right: Mission/Vision/Values */}
-          <motion.div
-            initial={{ opacity: 0, x: 32 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            className="space-y-5"
-          >
-            {pillars.map(({ icon: Icon, title, desc }, i) => (
-              <motion.div
-                key={title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.12 }}
-                className="bg-white rounded-2xl p-6 border border-border/60 shadow-sm flex gap-5 items-start card-hover"
-                data-ocid={`about.pillar.card.${i + 1}`}
-              >
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <Icon size={22} className="text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-display font-bold text-foreground text-lg mb-2">
-                    {title}
-                  </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {desc}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-
-            {/* Logo/Brand */}
-            <div className="mt-6 bg-secondary rounded-2xl p-6 flex items-center gap-5">
-              <img
-                src="/assets/uploads/image-1.png"
-                alt="RiyaMeds Pharma"
-                className="h-16 w-auto object-contain bg-white rounded-xl p-2"
-              />
-              <div>
-                <div className="font-display font-bold text-white text-lg">
-                  RiyaMeds Pharma Pvt. Ltd.
-                </div>
-                <div className="text-white/60 text-sm mt-1">
-                  Registered under Indian Pharmaceutical Standards
-                </div>
+            {/* Values grid */}
+            <div className="bg-white rounded-2xl border border-border/60 shadow-sm p-6 space-y-4">
+              <h3 className="font-display font-bold text-foreground text-lg flex items-center gap-2">
+                <Heart size={18} className="text-primary" />
+                Our Core Values
+              </h3>
+              <div className="grid grid-cols-2 gap-3">
+                {[
+                  { label: "Quality", color: "primary" },
+                  { label: "Innovation", color: "secondary" },
+                  { label: "Integrity", color: "primary" },
+                  { label: "Patient Focus", color: "secondary" },
+                ].map(({ label, color }) => (
+                  <div
+                    key={label}
+                    className={`px-4 py-3 rounded-xl text-sm font-semibold text-center border ${
+                      color === "primary"
+                        ? "bg-primary/8 border-primary/15 text-primary"
+                        : "bg-secondary/8 border-secondary/15 text-secondary"
+                    }`}
+                  >
+                    {label}
+                  </div>
+                ))}
               </div>
             </div>
           </motion.div>

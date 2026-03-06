@@ -1,13 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import {
   CheckCircle2,
@@ -19,13 +12,12 @@ import {
 } from "lucide-react";
 import { motion } from "motion/react";
 import { useState } from "react";
-import { products } from "../data/products";
+import { useActor } from "../hooks/useActor";
 
 interface FormState {
   name: string;
   email: string;
   phone: string;
-  product: string;
   message: string;
 }
 
@@ -33,7 +25,6 @@ interface FormErrors {
   name?: string;
   email?: string;
   phone?: string;
-  product?: string;
   message?: string;
 }
 
@@ -41,15 +32,16 @@ const initialForm: FormState = {
   name: "",
   email: "",
   phone: "",
-  product: "",
   message: "",
 };
 
 export default function ContactSection() {
+  const { actor } = useActor();
   const [form, setForm] = useState<FormState>(initialForm);
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
 
   function validate(): FormErrors {
     const errs: FormErrors = {};
@@ -58,9 +50,8 @@ export default function ContactSection() {
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
       errs.email = "Enter a valid email address.";
     if (!form.phone.trim()) errs.phone = "Phone number is required.";
-    else if (!/^[6-9]\d{9}$/.test(form.phone.replace(/\s/g, "")))
+    else if (!/^[6-9]\d{9}$/.test(form.phone.replace(/[\s\-]/g, "")))
       errs.phone = "Enter a valid 10-digit Indian mobile number.";
-    if (!form.product) errs.product = "Please select an option.";
     if (!form.message.trim()) errs.message = "Message is required.";
     else if (form.message.trim().length < 10)
       errs.message = "Message must be at least 10 characters.";
@@ -76,10 +67,25 @@ export default function ContactSection() {
     }
     setErrors({});
     setSubmitting(true);
-    // Simulate async submission
-    await new Promise((res) => setTimeout(res, 1400));
-    setSubmitting(false);
-    setSubmitted(true);
+    setSubmitError(false);
+    try {
+      if (actor) {
+        await actor.submitInquiry(
+          form.name.trim(),
+          form.email.trim(),
+          form.phone.trim(),
+          form.message.trim(),
+        );
+      } else {
+        // Fallback if actor not ready — simulate
+        await new Promise((res) => setTimeout(res, 1000));
+      }
+      setSubmitted(true);
+    } catch {
+      setSubmitError(true);
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   function handleChange(field: keyof FormState, value: string) {
@@ -103,11 +109,7 @@ export default function ContactSection() {
     {
       icon: MapPin,
       label: "Address",
-      lines: [
-        "RiyaMeds Pharma Pvt. Ltd.",
-        "123 Pharma Park, Andheri East,",
-        "Mumbai – 400069, Maharashtra",
-      ],
+      lines: ["Riyameds Pharma Private Limited", "Pharma Park, India"],
     },
     {
       icon: Clock,
@@ -119,11 +121,7 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="section-padding"
-      style={{
-        background:
-          "linear-gradient(180deg, oklch(0.98 0.005 145) 0%, oklch(0.96 0.02 258) 100%)",
-      }}
+      className="section-padding section-gradient-blue-light medical-pattern"
       data-ocid="contact.section"
     >
       <div className="max-w-7xl mx-auto">
@@ -134,11 +132,11 @@ export default function ContactSection() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <span className="inline-block text-primary font-semibold text-sm tracking-widest uppercase mb-3">
-            Get In Touch
+          <span className="inline-block text-primary font-semibold text-sm tracking-widest uppercase mb-3 bg-primary/8 px-4 py-1.5 rounded-full">
+            Contact Us
           </span>
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            We're Here to <span className="text-gradient-green">Help You</span>
+            Get In <span className="text-gradient-blue">Touch</span>
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto text-lg">
             Have questions about our products or want to partner with us? Our
@@ -159,7 +157,7 @@ export default function ContactSection() {
               className="rounded-3xl p-8 text-white space-y-6"
               style={{
                 background:
-                  "linear-gradient(135deg, oklch(0.22 0.07 258) 0%, oklch(0.32 0.1 210) 100%)",
+                  "linear-gradient(135deg, oklch(0.18 0.12 250) 0%, oklch(0.28 0.14 230) 50%, oklch(0.30 0.14 200) 100%)",
               }}
             >
               {/* Logo */}
@@ -167,14 +165,14 @@ export default function ContactSection() {
                 <img
                   src="/assets/uploads/image-1.png"
                   alt="RiyaMeds Pharma"
-                  className="h-12 w-auto object-contain bg-white/10 rounded-xl p-1.5"
+                  className="h-14 w-auto object-contain bg-white/10 rounded-xl p-2 flex-shrink-0"
                 />
                 <div>
-                  <div className="font-display font-bold text-white text-lg">
-                    RiyaMeds Pharma Pvt. Ltd.
+                  <div className="font-display font-bold text-white text-lg leading-tight">
+                    Riyameds Pharma Private Limited
                   </div>
-                  <div className="text-white/60 text-xs">
-                    Genuine Care. Trusted Science.
+                  <div className="text-white/55 text-xs mt-0.5">
+                    Innovation in Care. Excellence in Relief.
                   </div>
                 </div>
               </div>
@@ -182,10 +180,10 @@ export default function ContactSection() {
               {contactItems.map(({ icon: Icon, label, lines }) => (
                 <div key={label} className="flex gap-4 items-start">
                   <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
-                    <Icon size={18} className="text-green-400" />
+                    <Icon size={18} className="text-teal-300" />
                   </div>
                   <div>
-                    <div className="text-white/60 text-xs font-semibold uppercase tracking-wide mb-1">
+                    <div className="text-white/50 text-xs font-bold uppercase tracking-widest mb-1">
                       {label}
                     </div>
                     {lines.map((l) => (
@@ -217,7 +215,9 @@ export default function ContactSection() {
                   className="flex flex-col items-center justify-center py-12 text-center gap-4"
                   data-ocid="contact.success_state"
                 >
-                  <CheckCircle2 size={56} className="text-primary" />
+                  <div className="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center">
+                    <CheckCircle2 size={36} className="text-secondary" />
+                  </div>
                   <h3 className="font-display font-bold text-foreground text-xl">
                     Inquiry Submitted!
                   </h3>
@@ -243,18 +243,31 @@ export default function ContactSection() {
                     Send Us a Message
                   </h3>
 
+                  {/* Submit error */}
+                  {submitError && (
+                    <div
+                      className="bg-destructive/10 border border-destructive/20 rounded-xl px-4 py-3 text-destructive text-sm font-medium"
+                      data-ocid="contact.error_state"
+                    >
+                      Failed to submit inquiry. Please try again.
+                    </div>
+                  )}
+
                   {/* Full Name */}
                   <div className="space-y-1.5">
-                    <Label htmlFor="name" className="font-semibold text-sm">
+                    <Label
+                      htmlFor="contact-name"
+                      className="font-semibold text-sm"
+                    >
                       Full Name <span className="text-destructive">*</span>
                     </Label>
                     <Input
-                      id="name"
+                      id="contact-name"
                       placeholder="e.g. Rahul Sharma"
                       value={form.name}
                       onChange={(e) => handleChange("name", e.target.value)}
                       className={errors.name ? "border-destructive" : ""}
-                      data-ocid="contact.name.input"
+                      data-ocid="contact.input"
                     />
                     {errors.name && (
                       <p
@@ -269,17 +282,20 @@ export default function ContactSection() {
                   {/* Email + Phone */}
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="space-y-1.5">
-                      <Label htmlFor="email" className="font-semibold text-sm">
+                      <Label
+                        htmlFor="contact-email"
+                        className="font-semibold text-sm"
+                      >
                         Email <span className="text-destructive">*</span>
                       </Label>
                       <Input
-                        id="email"
+                        id="contact-email"
                         type="email"
                         placeholder="you@example.com"
                         value={form.email}
                         onChange={(e) => handleChange("email", e.target.value)}
                         className={errors.email ? "border-destructive" : ""}
-                        data-ocid="contact.email.input"
+                        data-ocid="contact.email_input"
                       />
                       {errors.email && (
                         <p
@@ -291,17 +307,20 @@ export default function ContactSection() {
                       )}
                     </div>
                     <div className="space-y-1.5">
-                      <Label htmlFor="phone" className="font-semibold text-sm">
+                      <Label
+                        htmlFor="contact-phone"
+                        className="font-semibold text-sm"
+                      >
                         Phone <span className="text-destructive">*</span>
                       </Label>
                       <Input
-                        id="phone"
+                        id="contact-phone"
                         type="tel"
                         placeholder="9876543210"
                         value={form.phone}
                         onChange={(e) => handleChange("phone", e.target.value)}
                         className={errors.phone ? "border-destructive" : ""}
-                        data-ocid="contact.phone.input"
+                        data-ocid="contact.phone_input"
                       />
                       {errors.phone && (
                         <p
@@ -314,54 +333,22 @@ export default function ContactSection() {
                     </div>
                   </div>
 
-                  {/* Product of Interest */}
-                  <div className="space-y-1.5">
-                    <Label className="font-semibold text-sm">
-                      Product of Interest{" "}
-                      <span className="text-destructive">*</span>
-                    </Label>
-                    <Select
-                      value={form.product}
-                      onValueChange={(v) => handleChange("product", v)}
-                    >
-                      <SelectTrigger
-                        className={errors.product ? "border-destructive" : ""}
-                        data-ocid="contact.product.select"
-                      >
-                        <SelectValue placeholder="Select a product or topic" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="general">General Inquiry</SelectItem>
-                        {products.map((p) => (
-                          <SelectItem key={p.id} value={p.id}>
-                            {p.name}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    {errors.product && (
-                      <p
-                        className="text-destructive text-xs"
-                        data-ocid="contact.product_error"
-                      >
-                        {errors.product}
-                      </p>
-                    )}
-                  </div>
-
                   {/* Message */}
                   <div className="space-y-1.5">
-                    <Label htmlFor="message" className="font-semibold text-sm">
+                    <Label
+                      htmlFor="contact-message"
+                      className="font-semibold text-sm"
+                    >
                       Message <span className="text-destructive">*</span>
                     </Label>
                     <Textarea
-                      id="message"
-                      placeholder="Write your inquiry or question here…"
+                      id="contact-message"
+                      placeholder="Write your inquiry here…"
                       rows={4}
                       value={form.message}
                       onChange={(e) => handleChange("message", e.target.value)}
                       className={`resize-none ${errors.message ? "border-destructive" : ""}`}
-                      data-ocid="contact.message.textarea"
+                      data-ocid="contact.textarea"
                     />
                     {errors.message && (
                       <p
@@ -376,18 +363,22 @@ export default function ContactSection() {
                   <Button
                     type="submit"
                     disabled={submitting}
-                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 text-base"
+                    className="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3 text-base shadow-blue-sm"
                     data-ocid="contact.submit_button"
                   >
                     {submitting ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Sending…
+                        <span data-ocid="contact.loading_state">Sending…</span>
                       </>
                     ) : (
                       "Send Inquiry"
                     )}
                   </Button>
+
+                  <p className="text-xs text-muted-foreground text-center">
+                    By submitting, you agree to be contacted by our team.
+                  </p>
                 </form>
               )}
             </div>

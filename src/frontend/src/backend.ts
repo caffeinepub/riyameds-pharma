@@ -89,12 +89,35 @@ export class ExternalBlob {
         return this;
     }
 }
+export interface Inquiry {
+    name: string;
+    email: string;
+    message: string;
+    timestamp: Time;
+    phone: string;
+}
+export type Time = bigint;
 export interface backendInterface {
+    getAllInquiries(): Promise<Array<Inquiry>>;
     getInquiryCount(): Promise<bigint>;
-    submitInquiry(name: string, email: string, phone: string, product: string, message: string): Promise<boolean>;
+    submitInquiry(name: string, email: string, phone: string, message: string): Promise<void>;
 }
 export class Backend implements backendInterface {
     constructor(private actor: ActorSubclass<_SERVICE>, private _uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, private _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, private processError?: (error: unknown) => never){}
+    async getAllInquiries(): Promise<Array<Inquiry>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getAllInquiries();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getAllInquiries();
+            return result;
+        }
+    }
     async getInquiryCount(): Promise<bigint> {
         if (this.processError) {
             try {
@@ -109,17 +132,17 @@ export class Backend implements backendInterface {
             return result;
         }
     }
-    async submitInquiry(arg0: string, arg1: string, arg2: string, arg3: string, arg4: string): Promise<boolean> {
+    async submitInquiry(arg0: string, arg1: string, arg2: string, arg3: string): Promise<void> {
         if (this.processError) {
             try {
-                const result = await this.actor.submitInquiry(arg0, arg1, arg2, arg3, arg4);
+                const result = await this.actor.submitInquiry(arg0, arg1, arg2, arg3);
                 return result;
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
-            const result = await this.actor.submitInquiry(arg0, arg1, arg2, arg3, arg4);
+            const result = await this.actor.submitInquiry(arg0, arg1, arg2, arg3);
             return result;
         }
     }

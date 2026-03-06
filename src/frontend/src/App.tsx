@@ -6,7 +6,10 @@ import Footer from "./components/Footer";
 import HeroSection from "./components/HeroSection";
 import Navbar from "./components/Navbar";
 import ProductsSection from "./components/ProductsSection";
-import TestimonialsSection from "./components/TestimonialsSection";
+import QualitySection from "./components/QualitySection";
+import TherapeuticSection from "./components/TherapeuticSection";
+import VisionMissionSection from "./components/VisionMissionSection";
+import WhyChooseSection from "./components/WhyChooseSection";
 
 export default function App() {
   return (
@@ -15,10 +18,13 @@ export default function App() {
       <Navbar />
       <main>
         <HeroSection />
-        <ProductsSection />
         <AboutSection />
+        <TherapeuticSection />
+        <ProductsSection />
+        <WhyChooseSection />
+        <QualitySection />
+        <VisionMissionSection />
         <DoctorsSection />
-        <TestimonialsSection />
         <ContactSection />
       </main>
       <Footer />

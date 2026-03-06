@@ -6,7 +6,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
-import { Star } from "lucide-react";
+import { CheckCircle2, Package, Star } from "lucide-react";
 import type { Product } from "../data/products";
 
 interface ProductModalProps {
@@ -40,7 +40,11 @@ export default function ProductModal({
 }: ProductModalProps) {
   if (!product) return null;
 
-  const isMuscleProd = product.category === "muscle";
+  const categoryColors: Record<string, string> = {
+    musculoskeletal: "bg-primary/10 text-primary border-primary/20",
+    gastro: "bg-amber-50 text-amber-600 border-amber-200",
+    derma: "bg-secondary/10 text-secondary border-secondary/20",
+  };
 
   return (
     <Dialog open={open} onOpenChange={(o) => !o && onClose()}>
@@ -55,34 +59,62 @@ export default function ProductModal({
             </DialogTitle>
             <Badge
               variant="secondary"
-              className={
-                isMuscleProd
-                  ? "bg-primary/10 text-primary border-primary/20"
-                  : "bg-secondary/10 text-secondary border-secondary/20"
-              }
+              className={categoryColors[product.category] ?? ""}
             >
-              {isMuscleProd ? "Muscle Recovery" : "Dermatology"}
+              {product.categoryLabel}
             </Badge>
           </div>
+          <p className="text-muted-foreground text-sm font-medium">
+            {product.brandName}
+          </p>
         </DialogHeader>
 
         {/* Product image */}
-        <div className="relative rounded-xl overflow-hidden bg-muted/50 aspect-[16/9]">
-          <img
-            src={product.image}
-            alt={product.name}
-            className="w-full h-full object-contain p-4"
-          />
-          {/* Price tag */}
-          <div className="absolute top-4 right-4 bg-primary text-primary-foreground font-bold text-lg px-4 py-1.5 rounded-full shadow-lg">
-            {product.price}
+        <div className="relative rounded-xl overflow-hidden bg-muted/40 border border-border/40">
+          <div className="aspect-square max-h-48 flex items-center justify-center p-4">
+            <img
+              src={product.image}
+              alt={product.name}
+              className="h-full w-full object-contain"
+            />
           </div>
         </div>
 
-        {/* Description */}
-        <p className="text-foreground/80 leading-relaxed">
-          {product.fullDescription}
-        </p>
+        {/* Formula */}
+        <div className="bg-accent/40 border border-border/40 rounded-xl px-4 py-3">
+          <div className="text-xs font-bold text-muted-foreground uppercase tracking-wide mb-1">
+            Formula
+          </div>
+          <p className="text-sm text-foreground/80 font-medium leading-snug">
+            {product.formula}
+          </p>
+        </div>
+
+        {/* Slogan */}
+        {product.slogan && (
+          <p className="text-sm font-semibold italic text-primary">
+            "{product.slogan}"
+          </p>
+        )}
+
+        <Separator />
+
+        {/* Indications */}
+        <div>
+          <h3 className="font-display font-semibold text-foreground mb-3 text-base">
+            Indications
+          </h3>
+          <div className="flex flex-wrap gap-2">
+            {product.indications.map((ind) => (
+              <span
+                key={ind}
+                className="text-xs font-medium px-2.5 py-1 bg-muted rounded-lg text-muted-foreground border border-border/40"
+              >
+                {ind}
+              </span>
+            ))}
+          </div>
+        </div>
 
         <Separator />
 
@@ -97,9 +129,10 @@ export default function ProductModal({
                 key={benefit}
                 className="flex items-start gap-2.5 text-sm text-foreground/80"
               >
-                <div className="w-5 h-5 rounded-full bg-primary/15 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                </div>
+                <CheckCircle2
+                  size={15}
+                  className="text-primary flex-shrink-0 mt-0.5"
+                />
                 {benefit}
               </li>
             ))}
@@ -108,32 +141,44 @@ export default function ProductModal({
 
         <Separator />
 
-        {/* Ingredients + Usage */}
-        <div className="grid sm:grid-cols-2 gap-6">
-          <div>
-            <h3 className="font-display font-semibold text-foreground mb-2 text-base">
-              Ingredients
-            </h3>
-            <p className="text-sm text-foreground/70 leading-relaxed bg-accent/50 p-3 rounded-lg">
-              {product.ingredients}
+        {/* Dosage + Packaging */}
+        <div className="grid sm:grid-cols-2 gap-4">
+          <div className="bg-accent/30 rounded-xl p-4 border border-border/40">
+            <div className="text-xs font-bold text-muted-foreground uppercase tracking-wide mb-1">
+              Dosage
+            </div>
+            <p className="text-sm text-foreground/80 font-medium">
+              {product.dosage}
             </p>
           </div>
-          <div>
-            <h3 className="font-display font-semibold text-foreground mb-2 text-base">
-              Usage Instructions
-            </h3>
-            <p className="text-sm text-foreground/70 leading-relaxed bg-accent/50 p-3 rounded-lg">
-              {product.usage}
+          <div className="bg-accent/30 rounded-xl p-4 border border-border/40">
+            <div className="flex items-center gap-1.5 text-xs font-bold text-muted-foreground uppercase tracking-wide mb-1">
+              <Package size={12} />
+              Packaging
+            </div>
+            <p className="text-sm text-foreground/80 font-medium">
+              {product.packaging}
             </p>
           </div>
         </div>
+
+        {/* Compliance */}
+        {product.compliance && (
+          <div className="flex flex-wrap gap-2">
+            {product.compliance.map((c) => (
+              <Badge key={c} variant="outline" className="text-xs">
+                {c}
+              </Badge>
+            ))}
+          </div>
+        )}
 
         <Separator />
 
         {/* Reviews */}
         <div>
           <h3 className="font-display font-semibold text-foreground mb-4 text-base">
-            Customer Reviews
+            Reviews
           </h3>
           <div className="space-y-3">
             {product.reviews.map((review, i) => (
@@ -156,11 +201,11 @@ export default function ProductModal({
           </div>
         </div>
 
-        {/* Close CTA */}
+        {/* Close */}
         <button
           type="button"
           onClick={onClose}
-          className="mt-2 w-full py-3 rounded-xl border-2 border-primary/30 text-primary font-semibold text-sm hover:bg-primary hover:text-primary-foreground transition-all duration-200"
+          className="mt-2 w-full py-3 rounded-xl border-2 border-primary/30 text-primary font-semibold text-sm hover:bg-primary hover:text-white transition-all duration-200"
           data-ocid="product.close_button"
         >
           Close

@@ -4,67 +4,68 @@
 
 /* ─── Font Faces ────────────────────────────────────────────── */
 @font-face {
-  font-family: "Bricolage Grotesque";
-  src: url("/assets/fonts/BricolageGrotesque-Variable.woff2") format("woff2");
-  font-weight: 200 800;
-  font-display: swap;
-}
-
-@font-face {
   font-family: "Plus Jakarta Sans";
   src: url("/assets/fonts/PlusJakartaSans-Variable.woff2") format("woff2");
   font-weight: 200 800;
   font-display: swap;
 }
 
-/* ─── Design Tokens ─────────────────────────────────────────── */
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/assets/fonts/BricolageGrotesque-Variable.woff2") format("woff2");
+  font-weight: 200 800;
+  font-display: swap;
+}
+
+/* ─── Design Tokens — Medical Blue + Teal ───────────────────── */
 @layer base {
   :root {
     --radius: 0.75rem;
 
-    /* RiyaMeds brand tokens */
-    --brand-green-l: 0.55;
-    --brand-green-c: 0.18;
-    --brand-green-h: 145;
-    --brand-navy-l: 0.22;
-    --brand-navy-c: 0.07;
-    --brand-navy-h: 258;
+    /* RiyaMeds medical brand tokens */
+    --medical-blue-l: 0.45;
+    --medical-blue-c: 0.21;
+    --medical-blue-h: 250;
+
+    --teal-l: 0.52;
+    --teal-c: 0.16;
+    --teal-h: 184;
 
     /* Semantic OKLCH tokens (raw L C H — no oklch() wrapper) */
-    --background: 0.98 0.005 145;
-    --foreground: 0.2 0.06 258;
+    --background: 0.985 0.004 220;
+    --foreground: 0.16 0.07 250;
     --card: 1 0 0;
-    --card-foreground: 0.2 0.06 258;
+    --card-foreground: 0.16 0.07 250;
     --popover: 1 0 0;
-    --popover-foreground: 0.2 0.06 258;
-    --primary: 0.55 0.18 145;
+    --popover-foreground: 0.16 0.07 250;
+    --primary: 0.45 0.21 250;
     --primary-foreground: 0.99 0 0;
-    --secondary: 0.22 0.07 258;
+    --secondary: 0.52 0.16 184;
     --secondary-foreground: 0.99 0 0;
-    --muted: 0.95 0.02 145;
-    --muted-foreground: 0.48 0.05 258;
-    --accent: 0.94 0.05 145;
-    --accent-foreground: 0.22 0.07 258;
+    --muted: 0.94 0.018 220;
+    --muted-foreground: 0.52 0.05 250;
+    --accent: 0.93 0.04 220;
+    --accent-foreground: 0.16 0.07 250;
     --destructive: 0.577 0.245 27.325;
     --destructive-foreground: 0.985 0 0;
-    --border: 0.88 0.03 145;
-    --input: 0.92 0.02 258;
-    --ring: 0.55 0.18 145;
+    --border: 0.88 0.025 220;
+    --input: 0.92 0.018 220;
+    --ring: 0.45 0.21 250;
 
-    --chart-1: 0.55 0.18 145;
-    --chart-2: 0.22 0.07 258;
-    --chart-3: 0.7 0.18 145;
-    --chart-4: 0.38 0.09 258;
-    --chart-5: 0.85 0.1 145;
+    --chart-1: 0.45 0.21 250;
+    --chart-2: 0.52 0.16 184;
+    --chart-3: 0.62 0.18 250;
+    --chart-4: 0.68 0.14 184;
+    --chart-5: 0.35 0.16 250;
 
-    --sidebar: 0.22 0.07 258;
+    --sidebar: 0.18 0.08 250;
     --sidebar-foreground: 0.99 0 0;
-    --sidebar-primary: 0.55 0.18 145;
+    --sidebar-primary: 0.45 0.21 250;
     --sidebar-primary-foreground: 0.99 0 0;
-    --sidebar-accent: 0.3 0.08 258;
+    --sidebar-accent: 0.28 0.09 250;
     --sidebar-accent-foreground: 0.99 0 0;
-    --sidebar-border: 0.35 0.08 258;
-    --sidebar-ring: 0.55 0.18 145;
+    --sidebar-border: 0.32 0.09 250;
+    --sidebar-ring: 0.45 0.21 250;
   }
 
   * {
@@ -91,8 +92,15 @@
     @apply py-20 px-4 md:px-8;
   }
 
-  .text-gradient-green {
-    background: linear-gradient(135deg, oklch(0.55 0.18 145), oklch(0.72 0.2 145));
+  .text-gradient-blue {
+    background: linear-gradient(135deg, oklch(0.45 0.21 250), oklch(0.52 0.16 184));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-teal {
+    background: linear-gradient(135deg, oklch(0.52 0.16 184), oklch(0.62 0.18 184));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -102,13 +110,90 @@
     @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1.5;
   }
 
-  .green-glow {
-    box-shadow: 0 0 40px oklch(0.55 0.18 145 / 0.2);
+  .medical-glow {
+    box-shadow: 0 0 40px oklch(0.45 0.21 250 / 0.15);
   }
 
-  .navy-gradient {
-    background: linear-gradient(135deg, oklch(0.15 0.07 258) 0%, oklch(0.26 0.09 210) 100%);
+  .teal-glow {
+    box-shadow: 0 0 40px oklch(0.52 0.16 184 / 0.15);
   }
+
+  .hero-gradient {
+    background: linear-gradient(135deg, oklch(0.18 0.12 250) 0%, oklch(0.26 0.14 230) 40%, oklch(0.32 0.14 200) 70%, oklch(0.28 0.12 184) 100%);
+  }
+
+  .section-gradient-light {
+    background: linear-gradient(180deg, oklch(0.985 0.004 220) 0%, oklch(0.97 0.012 220) 100%);
+  }
+
+  .section-gradient-blue-light {
+    background: linear-gradient(180deg, oklch(0.97 0.015 230) 0%, oklch(0.975 0.012 220) 100%);
+  }
+
+  .navy-card {
+    background: linear-gradient(135deg, oklch(0.18 0.12 250) 0%, oklch(0.28 0.14 230) 100%);
+  }
+}
+
+/* ─── Logo Animation ─────────────────────────────────────────── */
+@keyframes logo-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-logo-enter {
+  animation: logo-enter 0.8s ease-out forwards;
+}
+
+/* ─── Other Animations ──────────────────────────────────────── */
+@keyframes float-up-down {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.6; }
+}
+
+.animate-float { animation: float-up-down 3s ease-in-out infinite; }
+.animate-fade-in-up { animation: fade-in-up 0.6s ease-out forwards; }
+.animate-fade-in { animation: fade-in 0.5s ease-out forwards; }
+.animate-pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+/* ─── Medical Pattern Background ────────────────────────────── */
+.medical-pattern {
+  background-image:
+    radial-gradient(circle at 1px 1px, oklch(0.45 0.21 250 / 0.04) 1px, transparent 0);
+  background-size: 36px 36px;
+}
+
+.cross-pattern {
+  background-image:
+    linear-gradient(oklch(0.45 0.21 250 / 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(0.45 0.21 250 / 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
 }
 
 /* ─── Scrollbar ─────────────────────────────────────────────── */
@@ -116,34 +201,12 @@
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: oklch(0.95 0.02 145);
+  background: oklch(0.95 0.01 220);
 }
 ::-webkit-scrollbar-thumb {
-  background: oklch(0.55 0.18 145);
+  background: oklch(0.45 0.21 250);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: oklch(0.45 0.18 145);
+  background: oklch(0.38 0.21 250);
 }
-
-/* ─── Animations ────────────────────────────────────────────── */
-@keyframes float-up-down {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-12px); }
-}
-
-@keyframes fade-in-up {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-
-.animate-float { animation: float-up-down 3s ease-in-out infinite; }
-.animate-fade-in-up { animation: fade-in-up 0.6s ease-out forwards; }
-.delay-100 { animation-delay: 0.1s; }
-.delay-200 { animation-delay: 0.2s; }
-.delay-300 { animation-delay: 0.3s; }

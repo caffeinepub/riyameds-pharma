@@ -20,10 +20,13 @@ export default {
         body: ['"Plus Jakarta Sans"', "sans-serif"],
       },
       colors: {
-        "brand-green": "oklch(0.55 0.18 145)",
-        "brand-navy": "oklch(0.22 0.07 258)",
-        "brand-green-light": "oklch(0.72 0.2 145)",
-        "brand-green-pale": "oklch(0.95 0.04 145)",
+        "medical-blue": "oklch(0.45 0.21 250)",
+        "medical-blue-dark": "oklch(0.32 0.18 250)",
+        "medical-blue-light": "oklch(0.65 0.16 250)",
+        "medical-teal": "oklch(0.52 0.16 184)",
+        "medical-teal-dark": "oklch(0.38 0.14 184)",
+        "medical-teal-light": "oklch(0.72 0.14 184)",
+        "navy-dark": "oklch(0.18 0.12 250)",
         border: "oklch(var(--border))",
         input: "oklch(var(--input))",
         ring: "oklch(var(--ring) / <alpha-value>)",
@@ -82,6 +85,9 @@ export default {
       },
       boxShadow: {
         xs: "0 1px 2px 0 rgba(0,0,0,0.05)",
+        "blue-sm": "0 4px 14px 0 oklch(0.45 0.21 250 / 0.25)",
+        "blue-md": "0 8px 30px 0 oklch(0.45 0.21 250 / 0.3)",
+        "teal-sm": "0 4px 14px 0 oklch(0.52 0.16 184 / 0.25)",
       },
       keyframes: {
         "accordion-down": {
