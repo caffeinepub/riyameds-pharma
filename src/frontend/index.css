@@ -1,0 +1,149 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Font Faces ────────────────────────────────────────────── */
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/assets/fonts/BricolageGrotesque-Variable.woff2") format("woff2");
+  font-weight: 200 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("/assets/fonts/PlusJakartaSans-Variable.woff2") format("woff2");
+  font-weight: 200 800;
+  font-display: swap;
+}
+
+/* ─── Design Tokens ─────────────────────────────────────────── */
+@layer base {
+  :root {
+    --radius: 0.75rem;
+
+    /* RiyaMeds brand tokens */
+    --brand-green-l: 0.55;
+    --brand-green-c: 0.18;
+    --brand-green-h: 145;
+    --brand-navy-l: 0.22;
+    --brand-navy-c: 0.07;
+    --brand-navy-h: 258;
+
+    /* Semantic OKLCH tokens (raw L C H — no oklch() wrapper) */
+    --background: 0.98 0.005 145;
+    --foreground: 0.2 0.06 258;
+    --card: 1 0 0;
+    --card-foreground: 0.2 0.06 258;
+    --popover: 1 0 0;
+    --popover-foreground: 0.2 0.06 258;
+    --primary: 0.55 0.18 145;
+    --primary-foreground: 0.99 0 0;
+    --secondary: 0.22 0.07 258;
+    --secondary-foreground: 0.99 0 0;
+    --muted: 0.95 0.02 145;
+    --muted-foreground: 0.48 0.05 258;
+    --accent: 0.94 0.05 145;
+    --accent-foreground: 0.22 0.07 258;
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 0.985 0 0;
+    --border: 0.88 0.03 145;
+    --input: 0.92 0.02 258;
+    --ring: 0.55 0.18 145;
+
+    --chart-1: 0.55 0.18 145;
+    --chart-2: 0.22 0.07 258;
+    --chart-3: 0.7 0.18 145;
+    --chart-4: 0.38 0.09 258;
+    --chart-5: 0.85 0.1 145;
+
+    --sidebar: 0.22 0.07 258;
+    --sidebar-foreground: 0.99 0 0;
+    --sidebar-primary: 0.55 0.18 145;
+    --sidebar-primary-foreground: 0.99 0 0;
+    --sidebar-accent: 0.3 0.08 258;
+    --sidebar-accent-foreground: 0.99 0 0;
+    --sidebar-border: 0.35 0.08 258;
+    --sidebar-ring: 0.55 0.18 145;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: "Plus Jakarta Sans", sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Bricolage Grotesque", sans-serif;
+  }
+}
+
+/* ─── Custom Utilities ──────────────────────────────────────── */
+@layer utilities {
+  .section-padding {
+    @apply py-20 px-4 md:px-8;
+  }
+
+  .text-gradient-green {
+    background: linear-gradient(135deg, oklch(0.55 0.18 145), oklch(0.72 0.2 145));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1.5;
+  }
+
+  .green-glow {
+    box-shadow: 0 0 40px oklch(0.55 0.18 145 / 0.2);
+  }
+
+  .navy-gradient {
+    background: linear-gradient(135deg, oklch(0.15 0.07 258) 0%, oklch(0.26 0.09 210) 100%);
+  }
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: oklch(0.95 0.02 145);
+}
+::-webkit-scrollbar-thumb {
+  background: oklch(0.55 0.18 145);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.45 0.18 145);
+}
+
+/* ─── Animations ────────────────────────────────────────────── */
+@keyframes float-up-down {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-float { animation: float-up-down 3s ease-in-out infinite; }
+.animate-fade-in-up { animation: fade-in-up 0.6s ease-out forwards; }
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }

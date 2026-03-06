@@ -1,0 +1,5 @@
+service : {
+  getInquiryCount: () -> (nat) query;
+  submitInquiry: (name: text, email: text, phone: text, product: text,
+   message: text) -> (bool);
+}
