@@ -374,7 +374,7 @@ export const doctors = [
     id: 1,
     name: "Dr. Rajesh Sharma",
     specialization: "Orthopedic Surgeon",
-    qualification: "MBBS, MS Ortho — Apollo Hospitals",
+    qualification: "MBBS, MS Ortho — Apollo Hospitals, Mumbai",
     quote:
       "RiyaMeds musculoskeletal formulations deliver consistent results in post-operative recovery.",
     initials: "RS",
@@ -383,7 +383,7 @@ export const doctors = [
     id: 2,
     name: "Dr. Priya Menon",
     specialization: "Dermatologist",
-    qualification: "MBBS, MD Dermatology — AIIMS",
+    qualification: "MBBS, MD Dermatology — AIIMS, New Delhi",
     quote:
       "I recommend Benza Clean and Dermaviska to my patients — scientifically sound formulations.",
     initials: "PM",
@@ -392,7 +392,7 @@ export const doctors = [
     id: 3,
     name: "Dr. Anil Verma",
     specialization: "Sports Medicine Specialist",
-    qualification: "MBBS, DNBSM — Fortis Healthcare",
+    qualification: "MBBS, DNBSM — Fortis Healthcare, Pune",
     quote:
       "Voltacure-S is my go-to recommendation for sports injury and acute musculoskeletal pain.",
     initials: "AV",
@@ -401,10 +401,46 @@ export const doctors = [
     id: 4,
     name: "Dr. Sunita Patel",
     specialization: "General Physician",
-    qualification: "MBBS, MD Medicine — Narayana Health",
+    qualification: "MBBS, MD Medicine — Narayana Health, Nashik",
     quote:
       "Trusted quality formulations — I confidently prescribe RiyaMeds to my patients.",
     initials: "SP",
+  },
+  {
+    id: 5,
+    name: "Dr. Vikram Kulkarni",
+    specialization: "Rheumatologist",
+    qualification: "MBBS, MD, DM Rheumatology — KEM Hospital, Mumbai",
+    quote:
+      "Inflamora-S provides excellent triple-action relief for my rheumatoid arthritis patients.",
+    initials: "VK",
+  },
+  {
+    id: 6,
+    name: "Dr. Neha Joshi",
+    specialization: "Cosmetologist",
+    qualification: "MBBS, DVD — Ruby Hall Clinic, Pune",
+    quote:
+      "Dermaviska Spray is a game-changer for body acne — patients love the 360° delivery system.",
+    initials: "NJ",
+  },
+  {
+    id: 7,
+    name: "Dr. Suresh Patil",
+    specialization: "Pain Management Specialist",
+    qualification: "MBBS, MD Anaesthesia — Sahyadri Hospital, Nashik",
+    quote:
+      "RiyaMeds pain management range has become an essential part of my treatment protocols.",
+    initials: "SP",
+  },
+  {
+    id: 8,
+    name: "Dr. Kavita Deshmukh",
+    specialization: "Physiotherapist & Rehab",
+    qualification: "BPT, MPT Orthopedics — Wockhardt Hospital, Nashik",
+    quote:
+      "My rehabilitation patients recover faster with Voltacure-S — highly recommended.",
+    initials: "KD",
   },
 ];
 
@@ -434,5 +470,41 @@ export const partnerClinics = [
     name: "Manipal Skin & Care",
     city: "Hyderabad",
     type: "Derma Centre",
+  },
+  {
+    id: 7,
+    name: "Sahyadri Super Speciality",
+    city: "Nashik",
+    type: "Hospital",
+  },
+  {
+    id: 8,
+    name: "Wockhardt Hospital",
+    city: "Nashik",
+    type: "Multi-Speciality",
+  },
+  {
+    id: 9,
+    name: "Dr. Hedgewar Rugnalay",
+    city: "Nashik",
+    type: "Hospital",
+  },
+  {
+    id: 10,
+    name: "Cure Well Ortho Clinic",
+    city: "Nashik",
+    type: "Ortho Clinic",
+  },
+  {
+    id: 11,
+    name: "Ruby Hall Clinic",
+    city: "Pune",
+    type: "Hospital",
+  },
+  {
+    id: 12,
+    name: "Kokilaben Dhirubhai Ambani",
+    city: "Mumbai",
+    type: "Hospital",
   },
 ];

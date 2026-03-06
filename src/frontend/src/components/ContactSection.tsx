@@ -99,17 +99,20 @@ export default function ContactSection() {
     {
       icon: Phone,
       label: "Helpline",
-      lines: ["+91 98765 43210", "+91 87654 32109"],
+      lines: ["+91 82638 51791"],
     },
     {
       icon: Mail,
       label: "Email",
-      lines: ["info@riyameds.com"],
+      lines: ["lokeshkhairnar36@gmail.com"],
     },
     {
       icon: MapPin,
       label: "Address",
-      lines: ["Riyameds Pharma Private Limited", "Pharma Park, India"],
+      lines: [
+        "Riyameds Pharma Private Limited",
+        "Roongta Business Hub, Indira Nagar, Nashik",
+      ],
     },
     {
       icon: Clock,
@@ -162,11 +165,24 @@ export default function ContactSection() {
             >
               {/* Logo */}
               <div className="flex items-center gap-4 mb-6">
-                <img
-                  src="/assets/uploads/image-1.png"
-                  alt="RiyaMeds Pharma"
-                  className="h-14 w-auto object-contain bg-white/10 rounded-xl p-2 flex-shrink-0"
-                />
+                <div
+                  className="flex-shrink-0 rounded-xl p-2"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, #0a1f44 0%, #1a3a6e 60%, #1a5c2e 100%)",
+                    border: "2px solid",
+                    borderImageSource:
+                      "linear-gradient(135deg, #22c55e, #1e40af)",
+                    borderImageSlice: 1,
+                    borderRadius: "12px",
+                  }}
+                >
+                  <img
+                    src="/assets/uploads/image-1.png"
+                    alt="RiyaMeds Pharma"
+                    className="h-12 w-auto object-contain"
+                  />
+                </div>
                 <div>
                   <div className="font-display font-bold text-white text-lg leading-tight">
                     Riyameds Pharma Private Limited

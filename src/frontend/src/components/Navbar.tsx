@@ -64,14 +64,26 @@ export default function Navbar() {
             className="flex items-center flex-shrink-0"
             data-ocid="nav.home_link"
           >
-            <img
-              src="/assets/uploads/image-1.png"
-              alt="RiyaMeds Pharma Private Limited"
-              className={`h-10 md:h-14 w-auto object-contain transition-none ${
+            <div
+              className={`flex items-center gap-2 rounded-xl px-2 py-1 transition-none ${
                 logoVisible ? "animate-logo-enter" : "opacity-0"
               }`}
-              style={{ animationFillMode: "forwards" }}
-            />
+              style={{
+                background:
+                  "linear-gradient(135deg, #0a1f44 0%, #1a3a6e 60%, #1a5c2e 100%)",
+                border: "2px solid",
+                borderImageSource: "linear-gradient(135deg, #22c55e, #1e40af)",
+                borderImageSlice: 1,
+                borderRadius: "12px",
+                animationFillMode: "forwards",
+              }}
+            >
+              <img
+                src="/assets/uploads/image-1.png"
+                alt="RiyaMeds Pharma Private Limited"
+                className="h-10 md:h-14 w-auto object-contain"
+              />
+            </div>
           </button>
 
           {/* Desktop nav */}
@@ -92,11 +104,11 @@ export default function Navbar() {
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-3">
             <a
-              href="tel:+919876543210"
+              href="tel:+918263851791"
               className="flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-primary transition-colors"
             >
               <Phone size={15} className="text-secondary" />
-              <span>+91 98765 43210</span>
+              <span>+91 82638 51791</span>
             </a>
             <Button
               onClick={() => handleNav("#contact")}

@@ -9,6 +9,7 @@ import ProductsSection from "./components/ProductsSection";
 import QualitySection from "./components/QualitySection";
 import TherapeuticSection from "./components/TherapeuticSection";
 import VisionMissionSection from "./components/VisionMissionSection";
+import WhatsAppButton from "./components/WhatsAppButton";
 import WhyChooseSection from "./components/WhyChooseSection";
 
 export default function App() {
@@ -28,6 +29,7 @@ export default function App() {
         <ContactSection />
       </main>
       <Footer />
+      <WhatsAppButton phoneNumber="918263851791" />
     </>
   );
 }

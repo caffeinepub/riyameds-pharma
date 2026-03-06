@@ -54,11 +54,24 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1 space-y-5">
             <div>
-              <img
-                src="/assets/uploads/image-1.png"
-                alt="RiyaMeds Pharma"
-                className="h-14 w-auto object-contain bg-white/8 rounded-xl p-1.5"
-              />
+              <div
+                className="inline-flex rounded-xl p-1.5"
+                style={{
+                  background:
+                    "linear-gradient(135deg, #0a1f44 0%, #1a3a6e 60%, #1a5c2e 100%)",
+                  border: "2px solid",
+                  borderImageSource:
+                    "linear-gradient(135deg, #22c55e, #1e40af)",
+                  borderImageSlice: 1,
+                  borderRadius: "12px",
+                }}
+              >
+                <img
+                  src="/assets/uploads/image-1.png"
+                  alt="RiyaMeds Pharma"
+                  className="h-14 w-auto object-contain"
+                />
+              </div>
             </div>
             <p className="text-white/55 text-sm leading-relaxed">
               Riyameds Pharma Private Limited delivers effective, safe, and
@@ -125,13 +138,14 @@ export default function Footer() {
                   className="text-teal-300 flex-shrink-0 mt-0.5"
                 />
                 <div className="text-white/55 text-sm">
-                  <div>+91 98765 43210</div>
-                  <div>+91 87654 32109</div>
+                  <div>+91 82638 51791</div>
                 </div>
               </li>
               <li className="flex items-center gap-3">
                 <Mail size={15} className="text-teal-300 flex-shrink-0" />
-                <span className="text-white/55 text-sm">info@riyameds.com</span>
+                <span className="text-white/55 text-sm">
+                  lokeshkhairnar36@gmail.com
+                </span>
               </li>
               <li className="flex items-start gap-3">
                 <MapPin
@@ -139,9 +153,9 @@ export default function Footer() {
                   className="text-teal-300 flex-shrink-0 mt-0.5"
                 />
                 <span className="text-white/55 text-sm leading-relaxed">
-                  Riyameds Pharma Pvt. Ltd.,
+                  Roongta Business Hub,
                   <br />
-                  India
+                  Indira Nagar, Nashik
                 </span>
               </li>
             </ul>

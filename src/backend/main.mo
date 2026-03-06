@@ -1,9 +1,9 @@
 import List "mo:core/List";
 import Runtime "mo:core/Runtime";
 import Time "mo:core/Time";
-import Migration "migration";
 
-(with migration = Migration.run)
+
+
 actor {
   type Inquiry = {
     name : Text;
