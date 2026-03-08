@@ -1,3 +1,4 @@
+import RiyamedsLogo from "@/components/RiyamedsLogo";
 import { Heart, Mail, MapPin, Phone } from "lucide-react";
 
 const currentYear = new Date().getFullYear();
@@ -54,24 +55,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1 space-y-5">
             <div>
-              <div
-                className="inline-flex rounded-xl p-1.5"
-                style={{
-                  background:
-                    "linear-gradient(135deg, #0a1f44 0%, #1a3a6e 60%, #1a5c2e 100%)",
-                  border: "2px solid",
-                  borderImageSource:
-                    "linear-gradient(135deg, #22c55e, #1e40af)",
-                  borderImageSlice: 1,
-                  borderRadius: "12px",
-                }}
-              >
-                <img
-                  src="/assets/uploads/image-1.png"
-                  alt="RiyaMeds Pharma"
-                  className="h-14 w-auto object-contain"
-                />
-              </div>
+              <RiyamedsLogo height={52} />
             </div>
             <p className="text-white/55 text-sm leading-relaxed">
               Riyameds Pharma Private Limited delivers effective, safe, and
@@ -170,18 +154,27 @@ export default function Footer() {
             © {currentYear} Riyameds Pharma Private Limited. All rights
             reserved.
           </p>
-          <p className="text-white/35 text-xs flex items-center gap-1.5">
-            Built with{" "}
-            <Heart size={11} className="text-rose-400 fill-rose-400" /> using{" "}
+          <div className="flex items-center gap-4">
+            <p className="text-white/35 text-xs flex items-center gap-1.5">
+              Built with{" "}
+              <Heart size={11} className="text-rose-400 fill-rose-400" /> using{" "}
+              <a
+                href={`https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(window.location.hostname)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-teal-300 hover:text-teal-200 transition-colors"
+              >
+                caffeine.ai
+              </a>
+            </p>
             <a
-              href={`https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(window.location.hostname)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-teal-300 hover:text-teal-200 transition-colors"
+              href="/admin"
+              className="text-white/20 hover:text-white/45 text-xs transition-colors"
+              data-ocid="footer.admin.link"
             >
-              caffeine.ai
+              Admin
             </a>
-          </p>
+          </div>
         </div>
       </div>
     </footer>

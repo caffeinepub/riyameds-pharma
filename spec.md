@@ -1,53 +1,42 @@
 # RiyaMeds Pharma
 
 ## Current State
-Project exists with a previous failed build attempt. No stable frontend code. Product images are uploaded to /assets/uploads/.
+The website is a full-stack pharmaceutical company site with a React frontend and Motoko backend. It includes:
+- Hero, About, Therapeutic, Products, Why Choose, Quality, Vision/Mission, Doctors, Contact sections
+- Customer inquiry form that stores submissions in the backend via `submitInquiry`
+- Backend exposes `getAllInquiries`, `getInquiryCount`, `submitInquiry`
+- WhatsApp floating button for direct customer contact
+- Animated RiyaMeds SVG logo in the navbar
+- Real contact details, doctor profiles, and partner hospitals
+
+Currently missing: an admin panel where the company owner can log in and view all customer inquiries submitted through the contact form.
 
 ## Requested Changes (Diff)
 
 ### Add
-- Full professional pharmaceutical company website for Riyameds Pharma Private Limited
-- Animated logo entrance (fade in + slide down) on page load using uploaded logo images
-- Hero section with headline, subtext, tagline, and two CTA buttons
-- About Us section with company description
-- Vision & Mission section
-- Core Values section (Quality, Innovation, Integrity, Patient Focus)
-- Therapeutic Areas section (Musculoskeletal Pain Management, Dermatology)
-- Product Portfolio section with 9 products using real uploaded product images:
-  1. Inflamora S - Aceclofenac 100mg + Paracetamol 325mg + Serratiopeptidase 15mg
-  2. Inflamora - Aceclofenac + Paracetamol Tablets
-  3. Voltacure - Paracetamol 325mg + Diclofenac Potassium 50mg
-  4. Voltacure-S - Diclofenac Potassium 50mg + Paracetamol 325mg + Serratiopeptidase 10mg
-  5. Pantaprix - Pantoprazole Gastro-Resistant Tablets IP 40mg
-  6. Dompancid - Pantoprazole Gastro-Resistant and Domperidone Prolonged-Release Capsules IP
-  7. Benza Clean Face Wash - Benzoyl Peroxide 4%
-  8. Dermaviska Cream - Glycolic Acid, Lactic Acid, Lavender Oil, Urea, Tea Tree Oil
-  9. Dermaviska Spray - Benzoyl Peroxide + Salicylic Acid + Provitamin B5 + Zinc PCA
-- Each product card shows product image, name, formula, indications, and key benefits
-- Why Choose Us section with 6 bullet points
-- Quality & Research section
-- Contact section with inquiry form (Name, Email, Phone, Message fields)
-- Backend contact form submission storage
-- Sticky navigation with links to all sections: Home, About Us, Therapeutic Areas, Product Portfolio, Why Choose Us, Quality & Research, Vision & Mission, Contact
-- Professional medical UI with white + medical blue + teal color palette, soft gradients, clean typography
+- Admin login page at `/admin` route (using Internet Identity / authorization component)
+- Admin dashboard showing all submitted inquiries in a clean table/card list
+- Each inquiry shows: name, phone, email, message, and timestamp
+- "Admin" link visible only when logged in (or a hidden route at `/admin`)
+- Inquiry count badge/stat at the top of the admin panel
+- Logout button in the admin panel
 
 ### Modify
-- Nothing (fresh build)
+- `App.tsx` to support routing between the main website (`/`) and the admin panel (`/admin`)
+- Backend `getAllInquiries` to be restricted so only the canister controller/admin can access it (use authorization component)
 
 ### Remove
-- Nothing (fresh build)
+- Nothing
 
 ## Implementation Plan
-1. Motoko backend: store contact inquiries with name, email, phone, message fields; query all inquiries
-2. Frontend: single-page app with smooth scroll navigation
-3. Navbar: sticky, logo with animated entrance, nav links
-4. Hero: full-width with gradient background, animated headline, two CTA buttons
-5. About: company description text
-6. Therapeutic Areas: two cards (Musculoskeletal, Dermatology)
-7. Products: grid of 9 cards with real product images, expandable details
-8. Why Choose Us: icon list
-9. Quality & Research: informational section
-10. Vision & Mission: split layout
-11. Core Values: 4-card grid
-12. Contact: form wired to backend submitInquiry
-13. All sections smooth-scrollable via navbar
+1. Select `authorization` Caffeine component for Internet Identity login
+2. Regenerate backend with authorization so `getAllInquiries` is access-controlled
+3. Add React Router to the frontend for `/` and `/admin` routes
+4. Create `AdminPage.tsx` with:
+   - Login state check (redirect to login if not authenticated)
+   - Internet Identity login button
+   - Inquiry list with name, phone, email, message, date
+   - Logout button
+   - Stats header (total inquiry count)
+5. Update `App.tsx` to route between main site and admin panel
+6. Add a small "Admin" footer link or hidden `/admin` URL access

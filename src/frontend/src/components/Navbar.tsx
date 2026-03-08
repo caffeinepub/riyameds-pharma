@@ -1,3 +1,4 @@
+import RiyamedsLogo from "@/components/RiyamedsLogo";
 import { Button } from "@/components/ui/button";
 import { Menu, Phone, X } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -65,24 +66,12 @@ export default function Navbar() {
             data-ocid="nav.home_link"
           >
             <div
-              className={`flex items-center gap-2 rounded-xl px-2 py-1 transition-none ${
+              className={`transition-none ${
                 logoVisible ? "animate-logo-enter" : "opacity-0"
               }`}
-              style={{
-                background:
-                  "linear-gradient(135deg, #0a1f44 0%, #1a3a6e 60%, #1a5c2e 100%)",
-                border: "2px solid",
-                borderImageSource: "linear-gradient(135deg, #22c55e, #1e40af)",
-                borderImageSlice: 1,
-                borderRadius: "12px",
-                animationFillMode: "forwards",
-              }}
+              style={{ animationFillMode: "forwards" }}
             >
-              <img
-                src="/assets/uploads/image-1.png"
-                alt="RiyaMeds Pharma Private Limited"
-                className="h-10 md:h-14 w-auto object-contain"
-              />
+              <RiyamedsLogo height={48} />
             </div>
           </button>
 
