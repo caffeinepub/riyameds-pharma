@@ -12,7 +12,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useInternetIdentity } from "@/hooks/useInternetIdentity";
-import { useGetAllInquiries } from "@/hooks/useQueries";
+import { useGetAllInquiries } from "@/hooks/usePublicQueries";
 import {
   InboxIcon,
   Loader2,

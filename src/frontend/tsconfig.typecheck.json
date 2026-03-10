@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    "*.config.js",
+    "src/hooks/useActor.ts",
+    "src/hooks/useInternetIdentity.ts",
+    "src/hooks/useQueries.ts"
+  ]
+}

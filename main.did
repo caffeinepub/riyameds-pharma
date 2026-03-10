@@ -1,5 +1,9 @@
 service : {
+  submitInquiry: (name: text, email: text, phone: text, message: text) -> ();
+  getAllInquiries: () -> (vec record { name: text; email: text; phone: text; message: text; timestamp: int }) query;
   getInquiryCount: () -> (nat) query;
-  submitInquiry: (name: text, email: text, phone: text, product: text,
-   message: text) -> (bool);
+  _initializeAccessControlWithSecret: (secret: text) -> ();
+  getCallerUserRole: () -> (variant { admin; user; guest }) query;
+  assignCallerUserRole: (user: principal, role: variant { admin; user; guest }) -> ();
+  isCallerAdmin: () -> (bool) query;
 }

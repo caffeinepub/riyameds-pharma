@@ -7,10 +7,38 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { motion } from "motion/react";
+import { useState } from "react";
 
 function handleScroll(id: string) {
   const el = document.querySelector(id);
   if (el) el.scrollIntoView({ behavior: "smooth" });
+}
+
+function HeroProductImage({ src, name }: { src: string; name: string }) {
+  const [error, setError] = useState(false);
+  const initials = name
+    .split(" ")
+    .slice(0, 2)
+    .map((w) => w[0])
+    .join("")
+    .toUpperCase();
+  if (error) {
+    return (
+      <div className="w-16 h-16 rounded-xl flex items-center justify-center bg-white/15 border border-white/20">
+        <span className="text-white font-bold text-sm tracking-wide">
+          {initials}
+        </span>
+      </div>
+    );
+  }
+  return (
+    <img
+      src={src}
+      alt={name}
+      className="w-16 h-16 object-contain"
+      onError={() => setError(true)}
+    />
+  );
 }
 
 const trustBadges = [
@@ -213,11 +241,7 @@ export default function HeroSection() {
                         className="rounded-2xl p-3 flex flex-col items-center gap-2 border border-white/10 hover:border-white/25 transition-all duration-300 hover:scale-105 cursor-pointer"
                         style={{ background: "oklch(1 0 0 / 0.08)" }}
                       >
-                        <img
-                          src={item.src}
-                          alt={item.name}
-                          className="w-16 h-16 object-contain"
-                        />
+                        <HeroProductImage src={item.src} name={item.name} />
                         <span className="text-white/60 text-[10px] font-semibold text-center leading-tight">
                           {item.name}
                         </span>

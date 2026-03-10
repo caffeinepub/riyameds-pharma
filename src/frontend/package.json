@@ -7,7 +7,7 @@
     "build:skip-bindings": "vite build && pnpm copy:env",
     "build": "vite build && pnpm copy:env",
     "copy:env": "cp env.json dist/",
-    "typecheck": "tsc --noEmit --pretty",
+    "typecheck": "tsc --noEmit --pretty -p tsconfig.typecheck.json",
     "check": "biome check src",
     "fix": "biome check --write src"
   },

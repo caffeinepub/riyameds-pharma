@@ -6,6 +6,41 @@ import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import { type Product, products } from "../data/products";
 
+function ProductImagePlaceholder({
+  name,
+  category,
+}: {
+  name: string;
+  category: string;
+}) {
+  const initials = name
+    .split(" ")
+    .slice(0, 2)
+    .map((w) => w[0])
+    .join("")
+    .toUpperCase();
+  const gradients: Record<string, string> = {
+    musculoskeletal:
+      "linear-gradient(135deg, oklch(0.45 0.21 250), oklch(0.52 0.16 184))",
+    gastro: "linear-gradient(135deg, oklch(0.60 0.16 55), oklch(0.72 0.14 80))",
+    derma:
+      "linear-gradient(135deg, oklch(0.52 0.16 184), oklch(0.62 0.14 200))",
+  };
+  return (
+    <div
+      className="w-full h-full rounded-xl flex flex-col items-center justify-center gap-2"
+      style={{ background: gradients[category] ?? gradients.musculoskeletal }}
+    >
+      <span className="text-white font-bold text-3xl tracking-wide opacity-90">
+        {initials}
+      </span>
+      <span className="text-white/60 text-xs font-semibold text-center px-2 leading-tight">
+        {name}
+      </span>
+    </div>
+  );
+}
+
 const categoryConfig: Record<
   string,
   { label: string; color: string; bg: string; border: string }
@@ -32,6 +67,7 @@ const categoryConfig: Record<
 
 function ProductCard({ product, index }: { product: Product; index: number }) {
   const [expanded, setExpanded] = useState(false);
+  const [imgError, setImgError] = useState(false);
   const cfg = categoryConfig[product.category];
 
   return (
@@ -59,12 +95,20 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       {/* Image area */}
       <div className="relative bg-gradient-to-br from-slate-50 to-slate-100 overflow-hidden">
         <div className="aspect-square flex items-center justify-center p-6">
-          <img
-            src={product.image}
-            alt={product.name}
-            className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
-            loading="lazy"
-          />
+          {imgError ? (
+            <ProductImagePlaceholder
+              name={product.name}
+              category={product.category}
+            />
+          ) : (
+            <img
+              src={product.image}
+              alt={product.name}
+              className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
+              onError={() => setImgError(true)}
+            />
+          )}
         </div>
         {/* Category badge */}
         <div className="absolute top-3 left-3">

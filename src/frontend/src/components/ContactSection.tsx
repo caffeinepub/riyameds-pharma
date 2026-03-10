@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import { motion } from "motion/react";
 import { useState } from "react";
-import { useActor } from "../hooks/useActor";
+import { usePublicActor } from "../hooks/usePublicActor";
 
 interface FormState {
   name: string;
@@ -36,7 +36,7 @@ const initialForm: FormState = {
 };
 
 export default function ContactSection() {
-  const { actor } = useActor();
+  const { actor } = usePublicActor();
   const [form, setForm] = useState<FormState>(initialForm);
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitting, setSubmitting] = useState(false);
